@@ -1,0 +1,12 @@
+---
+
+- name: Get the version information of the latest release of Diagrams
+  uri:
+    url: https://pypi.org/pypi/diagrams/json
+    return_content: true
+    body_format: json
+  register: diagrams_get_latest_version
+
+- name: Ensure the diagrams_version variable is set
+  set_fact:
+    diagrams_version: "{{ diagrams_get_latest_version.json.info.version }}"

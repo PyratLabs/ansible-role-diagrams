@@ -1,0 +1,14 @@
+---
+
+- name: Check the path for Python
+  command: which python3
+  register: diagrams_check_python_3_path
+  failed_when: diagrams_check_python_3_path.rc > 0
+  changed_when: false
+  when: diagrams_python3_path is not defined
+
+- name: Ensure the path to Python 3 is set as a fact
+  set_fact:
+    diagrams_python3_path: "{{ diagrams_check_python_3_path.stdout }}"
+    diagrams_ansible_python_interpreter: "{{ ansible_python_interpreter | default(omit) }}"
+  when: diagrams_python3_path is not defined

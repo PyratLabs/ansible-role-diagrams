@@ -1,0 +1,9 @@
+---
+
+- name: Ensure graphviz, Python 3 and Python Pip is installed
+  zypper:
+    name:
+      - graphviz
+      - python3
+      - python3-pip
+    state: present

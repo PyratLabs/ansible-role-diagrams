@@ -1,0 +1,34 @@
+---
+
+- name: Check to see if the Diagrams version directory exists
+  stat:
+    path: "{{ diagrams_install_dir }}/diagrams-{{ diagrams_version }}"
+  register: diagrams_check_version_dir
+
+- name: Fail if the Diagrams version directory doesn't exist
+  fail:
+    msg: "{{ diagrams_install_dir }}/diagrams-{{ diagrams_version }} is missing after play."
+  when: not diagrams_check_version_dir.stat.exists
+
+- name: Check to see if the Diagrams current symlink exists
+  stat:
+    path: "{{ diagrams_install_dir }}/{{ diagrams_current_dirname }}"
+  register: diagrams_check_symlink_dir
+
+- name: Fail if the Diagrams symlink directory doesn't exist
+  fail:
+    msg: "{{ diagrams_install_dir }}/{{ diagrams_current_dirname }} symlink not correct after play."
+  when: not diagrams_check_symlink_dir.stat.exists
+        or not diagrams_check_symlink_dir.stat.islnk
+        or diagrams_check_symlink_dir.stat.lnk_target != (diagrams_install_dir + "/diagrams-" + diagrams_version)
+
+- name: Check to see if the Diagrams version directory is a virtualenv
+  stat:
+    path: "{{ diagrams_install_dir }}/{{ diagrams_current_dirname }}/bin/activate"
+  register: diagrams_check_virtualenv_dir
+
+- name: Fail if the Diagrams virtualenv directory doesn't exist
+  fail:
+    msg: "{{ diagrams_install_dir }}/{{ diagrams_current_dirname }}/bin/activate not found after play."
+  when: not diagrams_check_virtualenv_dir.stat.exists
+        or not diagrams_check_virtualenv_dir.stat.isreg
