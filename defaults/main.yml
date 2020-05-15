@@ -1,13 +1,13 @@
 ---
 
-# Use a specific version of azure-cli, eg. `0.10.0`. Specify `false` for latest.
+# Use a specific version of diagrams, eg. `0.10.0`. Specify `false` for latest.
 diagrams_version: false
 
-# Installation directory to put azure-cli virtual environments.
+# Installation directory to put diagrams virtual environments.
 diagrams_install_dir: "{{ ansible_user_dir }}/.virtualenvs"
 
-# Name for the currently active azure-cli Virtualenv.
-diagrams_current_dirname: azure-cli
+# Name for the currently active diagrams Virtualenv.
+diagrams_current_dirname: diagrams
 
 # Allow role to install OS dependencies.
 diagrams_install_os_dependencies: false
