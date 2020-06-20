@@ -9,5 +9,8 @@ diagrams_install_dir: "{{ ansible_user_dir }}/.virtualenvs"
 # Name for the currently active diagrams Virtualenv.
 diagrams_current_dirname: diagrams
 
+# Allow venv to inherit packages from global site-packages
+diagrams_venv_site_packages: false
+
 # Allow role to install OS dependencies.
 diagrams_install_os_dependencies: false
