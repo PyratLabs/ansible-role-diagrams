@@ -36,7 +36,8 @@ my spare time so I cannot promise a speedy fix delivery.
 |------------------------------------|-------------------------------------------------------------------------------|----------------------|
 | `diagrams_version`                 | Use a specific version of diagrams, eg. `0.10.0`. Specify `false` for latest. | `false`              |
 | `diagrams_install_dir`             | Installation directory to put diagrams virtual environments.                  | `$HOME/.virtualenvs` |
-| `diagrams_current_dirname`         | Name for the currently active diagrams Virtualenv.                            | diagrams             |
+| `diagrams_venv_name`               | Name for the diagrams Virtualenv.                                             | diagrams             |
+| `diagrams_venv_suffix`             | Add a custom suffix to virtualenv.                                            | `diagrams_version`   |
 | `diagrams_venv_site_packages`      | Allow venv to inherit packages from global site-packages.                     | `false`              |
 | `diagrams_install_os_dependencies` | Allow role to install OS dependencies.                                        | `false`              |
 | `diagrams_python3_path`            | Specify a path to a specific python version to use in virtualenv.             | _NULL_               |
@@ -64,7 +65,7 @@ Example playbook for installing the latest diagrams version globally:
   vars:
     diagrams_install_os_dependencies: true
     diagrams_install_dir: /opt/diagrams/bin
-    diagrams_current_dirname: current
+    diagrams_venv_name: current
   roles:
     - role: xanmanning.diagrams
 ```
@@ -75,7 +76,7 @@ You need to activate the python3 virtual environment to be able to access
 `diagrams`. This is done as per the below:
 
 ```bash
-source {{ diagrams_install_dir }}/{{ diagrams_current_dirname }}/bin/activate
+source {{ diagrams_install_dir }}/{{ diagrams_venv_name }}/bin/activate
 ```
 
 In the above example global installation playbook, this would look like the

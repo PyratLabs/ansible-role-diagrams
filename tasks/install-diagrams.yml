@@ -1,5 +1,11 @@
 ---
 
+- name: Ensure the venv suffix is set
+  set_fact:
+    diagrams_venv_suffix: "{{ diagrams_version }}"
+  when: diagrams_venv_suffix is not defined
+        or not diagrams_venv_suffix
+
 - name: Ensure the Diagrams install directory exists
   file:
     path: "{{ diagrams_install_dir }}"
@@ -14,7 +20,7 @@
     name: diagrams
     version: "{{ diagrams_version }}"
     state: present
-    virtualenv: "{{ diagrams_install_dir }}/diagrams-{{ diagrams_version }}"
+    virtualenv: "{{ diagrams_install_dir }}/{{ diagrams_venv_name }}-{{ diagrams_venv_suffix }}"
     virtualenv_command: "{{ diagrams_python3_path }} -m venv"
     virtualenv_site_packages: "{{ diagrams_venv_site_packages | default(False) }}"
 
@@ -25,12 +31,12 @@
 
 - name: Ensure the current release is symlinked in the install directory
   file:
-    src: "{{ diagrams_install_dir }}/diagrams-{{ diagrams_version }}"
-    dest: "{{ diagrams_install_dir }}/{{ diagrams_current_dirname }}"
+    src: "{{ diagrams_install_dir }}/{{ diagrams_venv_name }}-{{ diagrams_venv_suffix }}"
+    dest: "{{ diagrams_install_dir }}/{{ diagrams_venv_name }}"
     state: link
 
 - name: Ensure venv wrapper exists in virtualenv bin directory
   template:
     src: venv.sh.j2
-    dest: "{{ diagrams_install_dir }}/diagrams-{{ diagrams_version }}/bin/venv"
+    dest: "{{ diagrams_install_dir }}/{{ diagrams_venv_name }}-{{ diagrams_venv_suffix }}/bin/venv"
     mode: 0755

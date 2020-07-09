@@ -5,6 +5,6 @@
   vars:
     diagrams_install_os_dependencies: true
     diagrams_install_dir: /opt/diagrams/bin
-    diagrams_current_dirname: current
+    diagrams_venv_name: current
   roles:
     - role: xanmanning.diagrams

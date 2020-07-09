@@ -6,8 +6,11 @@ diagrams_version: false
 # Installation directory to put diagrams virtual environments.
 diagrams_install_dir: "{{ ansible_user_dir }}/.virtualenvs"
 
-# Name for the currently active diagrams Virtualenv.
-diagrams_current_dirname: diagrams
+# Name for the diagrams Virtualenv.
+diagrams_venv_name: diagrams
+
+# Add a custom suffix to virtualenv (default: diagrams_version)
+diagrams_venv_suffix: false
 
 # Allow venv to inherit packages from global site-packages
 diagrams_venv_site_packages: false

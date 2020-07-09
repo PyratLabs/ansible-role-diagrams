@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-source "{{ diagrams_install_dir }}/{{ diagrams_current_dirname }}/bin/activate"
+source "{{ diagrams_install_dir }}/{{ diagrams_venv_name }}/bin/activate"
 
-{{ diagrams_install_dir }}/{{ diagrams_current_dirname }}/bin/python $@
+{{ diagrams_install_dir }}/{{ diagrams_venv_name }}/bin/python $@
